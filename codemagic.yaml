@@ -30,17 +30,13 @@ workflows:
           # xcode-project use-profiles
           echo "Bỏ qua code signing nếu build không cần chứng chỉ (để test thử)."
 
-      - name: Build iOS test
+      - name: Build iOS IPA (Unsigned)
         script: |
-          # Nếu bạn chưa config Code signing trên Apple Developer, hãy dùng lệnh sau để build app unsigned.
-          flutter build ios --release --no-codesign
-          
-          # Nếu đã cấu hình Code signing thành công, hãy dùng lệnh build file ipa:
-          # flutter build ipa --release --export-options-plist=/Users/builder/export_options.plist
+          flutter build ipa --release --no-codesign
 
     artifacts:
-      - build/ios/iphoneos/*.app
       - build/ios/ipa/*.ipa
+      - build/ios/iphoneos/*.app
       - flutter_drive.log
 
     publishing:
